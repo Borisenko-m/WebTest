@@ -1,0 +1,98 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\Packets\Chart.bundle.js" />
+    <None Include="wwwroot\lib\Packets\Chart.bundle.min.js" />
+    <None Include="wwwroot\lib\Packets\Chart.css" />
+    <None Include="wwwroot\lib\Packets\Chart.js" />
+    <None Include="wwwroot\lib\Packets\Chart.min.css" />
+    <None Include="wwwroot\lib\Packets\Chart.min.js" />
+    <None Include="wwwroot\lib\Packets\LICENSE.md" />
+    <None Include="wwwroot\lib\Packets\samples\advanced\content-security-policy.css" />
+    <None Include="wwwroot\lib\Packets\samples\advanced\content-security-policy.html" />
+    <None Include="wwwroot\lib\Packets\samples\advanced\content-security-policy.js" />
+    <None Include="wwwroot\lib\Packets\samples\advanced\progress-bar.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\area\analyser.js" />
+    <None Include="wwwroot\lib\Packets\samples\charts\area\line-boundaries.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\area\line-datasets.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\area\line-stacked.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\area\radar.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\bar\horizontal.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\bar\multi-axis.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\bar\stacked-group.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\bar\stacked.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\bar\vertical.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\bubble.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\combo-bar-line.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\doughnut.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\line\basic.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\line\interpolation-modes.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\line\line-styles.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\line\multi-axis.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\line\point-sizes.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\line\point-styles.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\line\skip-points.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\line\stepped.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\pie.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\polar-area.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\radar-skip-points.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\radar.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\scatter\basic.html" />
+    <None Include="wwwroot\lib\Packets\samples\charts\scatter\multi-axis.html" />
+    <None Include="wwwroot\lib\Packets\samples\favicon.ico" />
+    <None Include="wwwroot\lib\Packets\samples\index.html" />
+    <None Include="wwwroot\lib\Packets\samples\legend\callbacks.html" />
+    <None Include="wwwroot\lib\Packets\samples\legend\point-style.html" />
+    <None Include="wwwroot\lib\Packets\samples\legend\positioning.html" />
+    <None Include="wwwroot\lib\Packets\samples\logo.svg" />
+    <None Include="wwwroot\lib\Packets\samples\samples.js" />
+    <None Include="wwwroot\lib\Packets\samples\scales\filtering-labels.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\gridlines-display.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\gridlines-style.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\linear\min-max-suggested.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\linear\min-max.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\linear\step-size.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\logarithmic\line.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\logarithmic\scatter.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\multiline-labels.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\non-numeric-y.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\time\combo.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\time\financial.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\time\line-point-data.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\time\line.html" />
+    <None Include="wwwroot\lib\Packets\samples\scales\toggle-scale-type.html" />
+    <None Include="wwwroot\lib\Packets\samples\scriptable\bar.html" />
+    <None Include="wwwroot\lib\Packets\samples\scriptable\bubble.html" />
+    <None Include="wwwroot\lib\Packets\samples\scriptable\line.html" />
+    <None Include="wwwroot\lib\Packets\samples\scriptable\pie.html" />
+    <None Include="wwwroot\lib\Packets\samples\scriptable\polar.html" />
+    <None Include="wwwroot\lib\Packets\samples\scriptable\radar.html" />
+    <None Include="wwwroot\lib\Packets\samples\style.css" />
+    <None Include="wwwroot\lib\Packets\samples\tooltips\border.html" />
+    <None Include="wwwroot\lib\Packets\samples\tooltips\callbacks.html" />
+    <None Include="wwwroot\lib\Packets\samples\tooltips\custom-line.html" />
+    <None Include="wwwroot\lib\Packets\samples\tooltips\custom-pie.html" />
+    <None Include="wwwroot\lib\Packets\samples\tooltips\custom-points.html" />
+    <None Include="wwwroot\lib\Packets\samples\tooltips\interactions.html" />
+    <None Include="wwwroot\lib\Packets\samples\tooltips\positioning.html" />
+    <None Include="wwwroot\lib\Packets\samples\utils.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.1" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
+    <PackageReference Include="Spire.XLS" Version="10.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Classes\DBSync\" />
+  </ItemGroup>
+
+
+
+</Project>

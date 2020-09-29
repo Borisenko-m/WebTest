@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebTest</title>
+    <link href="https://dev.digital-dispetcher.ru/assets/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="https://dev.digital-dispetcher.ru/assets/css/jquery-ui.structure.min.css" rel="stylesheet">
+    <link href="https://dev.digital-dispetcher.ru/assets/css/jquery-ui.theme.min.css" rel="stylesheet">
+    <link href="https://dev.digital-dispetcher.ru/assets/css/dispetcher.css" rel="stylesheet">
+    <link href="https://dev.digital-dispetcher.ru/assets/css/select2.min.css" rel="stylesheet">
+    <link href="https://dev.digital-dispetcher.ru/assets/css/select2-bootstrap4.css" rel="stylesheet">
+    <link href="https://dev.digital-dispetcher.ru/assets/css/media.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/Packets/Chart.css" />
+</head>
+<body>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - WebTest - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    @RenderSection("Scripts", required: false)
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/Packets/Chart.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

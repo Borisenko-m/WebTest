@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Графики";
+}
+
+
+
+<div class="text-center" style="
+        height: 500px;
+        width: 500px;
+    ">
+    @{
+        var generator = new WebTest.Classes.JsChartGenerator("500", "500");
+    }
+    @Html.Raw(generator.GetCanvas)
+    <button onclick="draw()" class="btn btn-primary">CLICK!</button>
+
+</div>
