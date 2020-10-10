@@ -72,7 +72,7 @@ class Reports
                     join Address in DBSets.Addresses on application.AddressID equals Address.AddressID
                     join Region in DBSets.Regions on Address.RegionID equals Region.RegionID
                     join District in DBSets.Districts on Address.DistrictID equals District.DistrictID
-                    join City in DBSets.Cities on Address.CityID equals City.CityID
+                    join City in DBSets.Cities on Address.CityID equals City.CityID 
                     join Street in DBSets.Streets on Address.StreetID equals Street.StreetID
                     join Building in DBSets.Buildings on Address.BuildingID equals Building.BuildingID
                     join Classifier in DBSets.Classifiers on application.ClassifierID equals Classifier.ClassifierID

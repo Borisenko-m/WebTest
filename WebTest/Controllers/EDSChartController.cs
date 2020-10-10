@@ -14,8 +14,7 @@ namespace WebTest.Controllers
     [ApiController]
     public class EDSChartController : ControllerBase
     {
-        private IEnumerable<string> types = new List<string>() { "Заявки" };
-        private IEnumerable<string> categories = new List<string>() {
+        private IEnumerable<string> types = new List<string>() {
             "Все", "Принята", "Архив", "В работе", "Выполнено без акта",
             "Выполнено с актом", "Закрыта без подтверждения",
             "Закрыта с подтверждением", "Ожидает подтверждения центром",
@@ -23,6 +22,14 @@ namespace WebTest.Controllers
             "Отклонено", "Импортирована с ЕДС", "Контроль ГЖИ: Внеплановая проверка",
             "Закрыто (ГЖИ)", "Отправлено в добродел"
         };
+        private IEnumerable<string> categories = new List<string>() { "Компании", "Адреса", "Классификаторы" };
+        public Dictionary<string, IEnumerable<string>> specifications { get; set; } = new Dictionary<string, IEnumerable<string>>()
+        {
+            {"Компании", new List<string>() { "Компании" }},
+            {"Адреса", new List<string>() { "Регион", "Район", "Город", "Улица" }},
+            {"Классификаторы", new List<string>() { "Классификаторы" }}
+        };
+
 
 
         // GET: api/EDSChart
@@ -76,25 +83,39 @@ namespace WebTest.Controllers
         {
             switch (method)
             {
-                case 0:
+                case 0://полученеие типов
                     if (type == null) type = "";
                     foreach (string t in types)
                     {
                         if (t.ToLower().Contains(type.ToLower())) yield return t;
                     }
                     break;
-                case 1:
+                case 1: //полученеие категории
                     if (category == null) category = "";
                     foreach (string c in categories)
                     {
                         if (c.ToLower().Contains(category.ToLower())) yield return c;
                     }
                     break;
-                case 2:
+                case 2: //полученеие спецификации
+                    if (category == null) category = "";
+                    if (!specifications.ContainsKey(category)) break;
+                    foreach (string t in specifications[category])
+                    {
+                        yield return t;
+                    }
                     break;
                 default:
                     break;
             }
+
+            //https://localhost:5001/api/EDSChart/?type=
+        }
+
+        [HttpGet("specifications")]
+        public IEnumerable<string?> Get(string type, string spec)
+        {
+          
 
             //https://localhost:5001/api/EDSChart/?type=
         }
