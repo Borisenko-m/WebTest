@@ -28,9 +28,9 @@ namespace WebTest.Controllers
         private IEnumerable<string> categories = new List<string>() { "Компании", "Адреса", "Классификаторы" };
         public Dictionary<string, IEnumerable<string>> specifications { get; set; } = new Dictionary<string, IEnumerable<string>>()
         {
-            {"Компании", new List<string>() { "Компании" }},
-            {"Адреса", new List<string>() { "Регион", "Район", "Город", "Улица" }},
-            {"Классификаторы", new List<string>() { "Классификаторы" }}
+            {"компании", new List<string>() { "Компании" }},
+            {"адреса", new List<string>() { "Регион", "Район", "Город", "Улица" }},
+            {"классификаторы", new List<string>() { "Классификаторы" }}
         };
 
 
@@ -60,7 +60,7 @@ namespace WebTest.Controllers
                     break;
                 case 2: //полученеие спецификации (фильтры)
                     if (category == null) category = "";
-                    if (!specifications.ContainsKey(category)) break;
+                    if (!specifications.ContainsKey(category.ToLower())) break;
                     foreach (string t in specifications[category])
                     {
                         yield return t;
