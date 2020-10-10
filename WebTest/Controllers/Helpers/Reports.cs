@@ -21,40 +21,17 @@ class Reports
 
     public string? GetReport(ReportConfiguration report)
     {
-        switch (report.Type.ToLower())
+        switch (report.Category.ToLower())
         {
-            case "заявки":
-                if (report.Category == "Все") report.Category = "";
-                var result =
-                    from application in DBSets.Applications
-                    join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
-                    join Address in DBSets.Addresses on application.AddressID equals Address.AddressID
-                    join Region in DBSets.Regions on Address.RegionID equals Region.RegionID
-                    join District in DBSets.Districts on Address.DistrictID equals District.DistrictID
-                    join City in DBSets.Cities on Address.CityID equals City.CityID
-                    join Street in DBSets.Streets on Address.StreetID equals Street.StreetID
-                    join Building in DBSets.Buildings on Address.BuildingID equals Building.BuildingID
-                    join Classifier in DBSets.Classifiers on application.ClassifierID equals Classifier.ClassifierID
-                    join User in DBSets.Users on application.UserID equals User.UserID
-                    join Company in DBSets.Companies on application.CompanyID equals Company.CompanyID
-                    where application.CreatedAt >= report.From && application.CreatedAt <= report.To
-                    where ApplicationStatus.Name.ToLower().Contains(report.Category.ToLower())
-
-                    select new ReportModel()
-                    {
-                        ApplicationID = application.ApplicationID.ToString(),
-                        CreatedAt = application.CreatedAt.ToString(),
-                        Address = Region.Name + ", " + District.Name + ", " + City.Name + ", " + Street.Name + ", " + Building.Name,
-                        Classifier = Classifier.Name,
-                        UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
-                        UserPhone = User.PhoneNumber,
-                        Company = Company.Name,
-                        Description = application.Description.Replace("<p>", "").Replace("</p>", "")
-                    };
-
-                return new ModelToJson<ReportModel>() { Models = result.Select(l => l) }.JsonToString();
+            case "компании":
+                return GetReportByCompanies(report);
+            case "адреса":
+                return GetReportByAddresses(report);
+            case "классификаторы":
+                return GetReportByClassifiers(report);
             default:
                 return "";
+
         }
     }
 
@@ -73,7 +50,7 @@ class Reports
             join User in DBSets.Users on application.UserID equals User.UserID
             join Company in DBSets.Companies on application.CompanyID equals Company.CompanyID
             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
-            where report.Specifications.Contains(Company.Name.ToLower())
+            where report.Specifications.Contains(Company.Name.ToLower()) || report.Specifications.Count() == 0
 
             select new ReportModel()
             {
@@ -105,7 +82,7 @@ class Reports
             join User in DBSets.Users on application.UserID equals User.UserID
             join Company in DBSets.Companies on application.CompanyID equals Company.CompanyID
             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
-            where report.Specifications.Contains(Classifier.Name.ToLower())
+            where report.Specifications.Contains(Classifier.Name.ToLower()) || report.Specifications.Count() == 0
 
             select new ReportModel()
             {
@@ -124,6 +101,7 @@ class Reports
 
     public string? GetReportByAddresses(ReportConfiguration report)
     {
+        IEnumerable<ulong> addressesList = GetAddressesID(report);
         var result =
             from application in DBSets.Applications
             join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
@@ -138,10 +116,7 @@ class Reports
             join Company in DBSets.Companies on application.CompanyID equals Company.CompanyID
 
             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
-            where report.Specifications.Contains(Region.Name.ToLower())
-            where report.Specifications.Contains(District.Name.ToLower())
-            where report.Specifications.Contains(City.Name.ToLower())
-            where report.Specifications.Contains(Street.Name.ToLower())
+            where addressesList.Contains(application.AddressID) || report.Specifications.Count() == 0
 
             select new ReportModel()
             {
@@ -158,20 +133,32 @@ class Reports
         return new ModelToJson<ReportModel>() { Models = result.Select(l => l) }.JsonToString();
     }
 
-    private bool ContainsAddress(ReportConfiguration report, string region, string district, string city, string street)
+    private IEnumerable<ulong> GetAddressesID(ReportConfiguration report)
     {
         List<string> spec = report.Specifications.ToList();
-        int regionIndex = report.Specifications.IndexOf(region);
-        if (regionIndex != -1)
+        List<ulong> list = new List<ulong>();
+        for(int i = 0; i < spec.Count; i += 4)
         {
-            if (spec[regionIndex + 1] == district)
-            {
+            var result =
+            from Address in DBSets.Addresses
+            join Region in DBSets.Regions on Address.RegionID equals Region.RegionID
+            join District in DBSets.Districts on Address.DistrictID equals District.DistrictID
+            join City in DBSets.Cities on Address.CityID equals City.CityID
+            join Street in DBSets.Streets on Address.StreetID equals Street.StreetID
 
-            }
-            else if (spec[regionIndex + 1] == "") return true;
-            else return false;
+            where Region.Name == spec[i] || spec[i] == ""
+            where District.Name == spec[i+1] || spec[i+1] == ""
+            where City.Name == spec[i+2] || spec[i+2] == ""
+            where Street.Name == spec[i+3] || spec[i+3] == ""
+
+            select new 
+            {
+                Address = Address.AddressID,
+            };
+
+            list.AddRange(result.Select(l => l.Address));
         }
-        return false;
+        return list;
     }
 
     public IEnumerable<string?> GetCompanies(string company) =>
