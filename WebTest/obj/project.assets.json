@@ -6971,23 +6971,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\davil\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\basha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\davil\\source\\repos\\WebTest\\WebTest\\WebTest.csproj",
+      "projectUniqueName": "C:\\WebTest\\WebTest\\WebTest.csproj",
       "projectName": "WebTest",
-      "projectPath": "C:\\Users\\davil\\source\\repos\\WebTest\\WebTest\\WebTest.csproj",
-      "packagesPath": "C:\\Users\\davil\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\davil\\source\\repos\\WebTest\\WebTest\\obj\\",
+      "projectPath": "C:\\WebTest\\WebTest\\WebTest.csproj",
+      "packagesPath": "C:\\Users\\basha\\.nuget\\packages\\",
+      "outputPath": "C:\\WebTest\\WebTest\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\davil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\basha\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7046,7 +7042,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
