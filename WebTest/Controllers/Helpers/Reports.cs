@@ -69,6 +69,7 @@ class Reports
 
     public string? GetReportByClassifiers(ReportConfiguration report)
     {
+        IEnumerable<ulong> classifiersList = GetClassifiersID(report);
         var result =
             from application in DBSets.Applications
             join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
@@ -82,7 +83,7 @@ class Reports
             join User in DBSets.Users on application.UserID equals User.UserID
             join Company in DBSets.Companies on application.CompanyID equals Company.CompanyID
             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
-            where report.Specifications.Contains(Classifier.Name.ToLower()) || report.Specifications.Count() == 0
+            where classifiersList.Contains(Classifier.ClassifierID) || classifiersList.Contains(Classifier.ParentID) || report.Specifications.Count() == 0
 
             select new ReportModel()
             {
@@ -133,11 +134,27 @@ class Reports
         return new ModelToJson<ReportModel>() { Models = result.Select(l => l) }.JsonToString();
     }
 
+    private IEnumerable<ulong> GetClassifiersID(ReportConfiguration report)
+    {
+        List<ulong> list = new List<ulong>();
+        var result =
+        from Classifier in DBSets.Classifiers
+
+        where report.Specifications.Contains(Classifier.Name)
+
+        select new 
+        {
+            Classifier = Classifier.ClassifierID,
+        };
+
+        list.AddRange(result.Select(l => l.Classifier));
+        return list;
+    }
     private IEnumerable<ulong> GetAddressesID(ReportConfiguration report)
     {
         List<string> spec = report.Specifications.ToList();
         List<ulong> list = new List<ulong>();
-        for(int i = 0; i < spec.Count; i += 4)
+        for (int i = 0; i < spec.Count; i += 4)
         {
             var result =
             from Address in DBSets.Addresses
@@ -147,11 +164,11 @@ class Reports
             join Street in DBSets.Streets on Address.StreetID equals Street.StreetID
 
             where Region.Name == spec[i] || spec[i] == ""
-            where District.Name == spec[i+1] || spec[i+1] == ""
-            where City.Name == spec[i+2] || spec[i+2] == ""
-            where Street.Name == spec[i+3] || spec[i+3] == ""
+            where District.Name == spec[i + 1] || spec[i + 1] == ""
+            where City.Name == spec[i + 2] || spec[i + 2] == ""
+            where Street.Name == spec[i + 3] || spec[i + 3] == ""
 
-            select new 
+            select new
             {
                 Address = Address.AddressID,
             };

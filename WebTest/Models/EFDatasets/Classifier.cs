@@ -15,6 +15,9 @@ public class Classifier
     [Required, Column(TypeName = "varchar(45)")]
     public string AppDecisionTime { get; set; }
 
+    [Required]
+    public ulong ParentID { get; set; }
+
     [Timestamp]
     public byte[] CreatedAt { get; set; }
 
@@ -24,7 +27,8 @@ public class Classifier
         {"id","ClassifierID"},
         {"name","Name"},
         {"application_acceptance_time","AppAcceptanceTime"},
-        {"application_decision_time","AppDecisionTime"}
+        {"application_decision_time","AppDecisionTime"},
+        {"parent_id","ParentID"}
     };
 
 }
