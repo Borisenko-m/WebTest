@@ -61,7 +61,7 @@ namespace WebTest.Controllers
                 case 2: //полученеие спецификации (фильтры)
                     if (category == null) category = "";
                     if (!specifications.ContainsKey(category.ToLower())) break;
-                    foreach (string t in specifications[category])
+                    foreach (string t in specifications[category.ToLower()])
                     {
                         yield return t;
                     }
@@ -73,19 +73,19 @@ namespace WebTest.Controllers
         }
 
         //апишка для поиска по разным фильтрам
-        //https://localhost:5001/api/EDSChart/specifications/?type=компании&spec=    получаем список всех компании
-        //https://localhost:5001/api/EDSChart/specifications/?type=компании&spec=а   получаем список всех компании начинающих на "а"
-        //https://localhost:5001/api/EDSChart/specifications/?type=адреса&spec=а     получаем список всех регионов начинающих на "а"
-        //https://localhost:5001/api/EDSChart/specifications/?type=адреса&spec=а-    получаем список всех районов, которые принадлежать региону "а"
-        //https://localhost:5001/api/EDSChart/specifications/?type=адреса&spec=а-н   получаем список всех районов начинающих на "н", которые принадлежать региону "а"
+        //https://localhost:5001/api/EDSChart/specifications/?category=компании&spec=    получаем список всех компании
+        //https://localhost:5001/api/EDSChart/specifications/?category=компании&spec=а   получаем список всех компании начинающих на "а"
+        //https://localhost:5001/api/EDSChart/specifications/?category=адреса&spec=     получаем список всех регионов начинающих на "а"
+        //https://localhost:5001/api/EDSChart/specifications/?category=адреса&spec=а-    получаем список всех районов, которые принадлежать региону "а"
+        //https://localhost:5001/api/EDSChart/specifications/?category=адреса&spec=а-н   получаем список всех районов начинающих на "н", которые принадлежать региону "а"
         [HttpGet("specifications")]
-        public IEnumerable<string?> Get(string type, string spec)
+        public IEnumerable<string?> Get(string category, string spec)
         {
-            if (type == null) type = "";
+            if (category == null) category = "";
             if (spec == null) spec = "";
             string[] specifications = spec.Split("-");
 
-            switch (type.ToLower())
+            switch (category.ToLower())
             {
                 case "компании":
                     return new Reports(DBSets).GetCompanies(specifications[0]);

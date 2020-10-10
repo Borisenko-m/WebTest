@@ -15,7 +15,7 @@ namespace WebTest.Models
         [JsonPropertyName("category")]
         public string Category { get; set; }
 
-        [JsonPropertyName("spec")]
+        [JsonPropertyName("specification")]
         public IEnumerable<string> Specifications { get; set; }
 
         [JsonPropertyName("from")]
@@ -26,6 +26,7 @@ namespace WebTest.Models
 
         public void SpecificationsToLower()
         {
+            if(Specifications == null) Specifications = new List<string>();
             Specifications = Specifications.Select(l => l.ToLower());
         }
     }

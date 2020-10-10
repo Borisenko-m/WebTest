@@ -16,7 +16,7 @@ public class Classifier
     public string AppDecisionTime { get; set; }
 
     [Required]
-    public ulong ParentID { get; set; }
+    public int ParentID { get; set; }
 
     [Timestamp]
     public byte[] CreatedAt { get; set; }

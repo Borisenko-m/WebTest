@@ -55,7 +55,7 @@ class Reports
             select new ReportModel()
             {
                 ApplicationID = application.ApplicationID.ToString(),
-                CreatedAt = application.CreatedAt.ToString(),
+                CreatedAt = application.CreatedAt.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
                 Address = Region.Name + ", " + District.Name + ", " + City.Name + ", " + Street.Name + ", " + Building.Name,
                 Classifier = Classifier.Name,
                 UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
@@ -83,12 +83,12 @@ class Reports
             join User in DBSets.Users on application.UserID equals User.UserID
             join Company in DBSets.Companies on application.CompanyID equals Company.CompanyID
             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
-            where classifiersList.Contains(Classifier.ClassifierID) || classifiersList.Contains(Classifier.ParentID) || report.Specifications.Count() == 0
+            where classifiersList.Contains(Classifier.ClassifierID) || classifiersList.Contains((ulong)Classifier.ParentID) || report.Specifications.Count() == 0
 
             select new ReportModel()
             {
                 ApplicationID = application.ApplicationID.ToString(),
-                CreatedAt = application.CreatedAt.ToString(),
+                CreatedAt = application.CreatedAt.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
                 Address = Region.Name + ", " + District.Name + ", " + City.Name + ", " + Street.Name + ", " + Building.Name,
                 Classifier = Classifier.Name,
                 UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
@@ -122,7 +122,7 @@ class Reports
             select new ReportModel()
             {
                 ApplicationID = application.ApplicationID.ToString(),
-                CreatedAt = application.CreatedAt.ToString(),
+                CreatedAt = application.CreatedAt.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
                 Address = Region.Name + ", " + District.Name + ", " + City.Name + ", " + Street.Name + ", " + Building.Name,
                 Classifier = Classifier.Name,
                 UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
@@ -154,7 +154,7 @@ class Reports
     {
         List<string> spec = report.Specifications.ToList();
         List<ulong> list = new List<ulong>();
-        for (int i = 0; i < spec.Count; i += 4)
+        for (int i = 0; i < spec.Count && i + 3 < spec.Count; i += 4)
         {
             var result =
             from Address in DBSets.Addresses
