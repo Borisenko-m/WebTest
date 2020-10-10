@@ -8,21 +8,15 @@ namespace WebTest.Models
 {
     public class ReportConfiguration
     {
+
         [JsonPropertyName("type")]
         public string Type { get; set; }
 
         [JsonPropertyName("category")]
         public string Category { get; set; }
-        //public string Category {
-        //    get {
-        //        return Category;
-        //    }
-        //    set {
-        //        if (value == "Все") value = "";
-        //        Category = value;
-        //    }
-        //}
-        public string[] specifications { get; set; }
+
+        [JsonPropertyName("spec")]
+        public IEnumerable<string> Specifications { get; set; }
 
         [JsonPropertyName("from")]
         public DateTime From { get; set; }
@@ -30,13 +24,10 @@ namespace WebTest.Models
         [JsonPropertyName("to")]
         public DateTime To { get; set; }
 
-        //public ReportConfiguration()
-        //{
-        //    Type = "Заявки";
-        //    Category = "Принята";
-        //    From = DateTime.Parse("2019-12-12");
-        //    To = DateTime.Now;
-        //}
+        public void SpecificationsToLower()
+        {
+            Specifications = Specifications.Select(l => l.ToLower());
+        }
     }
 
 }
