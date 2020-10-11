@@ -11,8 +11,7 @@ namespace WebTest.Classes
         Workbook workbook;
         public ExceleChart()
         {
-            workbook = new Workbook();
-            workbook.SaveToHtml("ddd");
+            //workbook = new Workbook();
         }
         public ExceleChart(IPlottable<T, E> image) : this()
         {

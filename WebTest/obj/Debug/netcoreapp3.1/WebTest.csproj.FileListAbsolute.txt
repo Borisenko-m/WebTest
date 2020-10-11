@@ -137,4 +137,15 @@ C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Microsoft.Ex
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\EPPlus.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\System.Security.Cryptography.Pkcs.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 C:\Users\davil\source\repos\WebTest\WebTest\obj\Debug\netcoreapp3.1\WebTest.MvcApplicationPartsAssemblyInfo.cache

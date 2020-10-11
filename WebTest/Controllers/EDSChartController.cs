@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebTest.Models;
-
+using WebTest.Classes.ExcelIO;
 namespace WebTest.Controllers
 {
     [Route("api/[controller]")]
@@ -18,9 +18,17 @@ namespace WebTest.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            
             return new string[] { "Заявки", "Классификаторы" };
         }
-
+        // GET: /api/EDSChart/file.xlsx?
+        [HttpGet("{name}.xlsx")]
+        public async Task<IActionResult> Get(string name)
+        {
+            var io = new ExcelIO(name);
+            var res = new PhysicalFileResult(io.Test(name), "file/xlsx");
+            return res;
+        }
         // GET: /api/EDSChart/5?from=2020-01-01&to=2020-02-28
         [HttpGet("{from, to}", Name = "Get")]
         public string? Get(string from, string to)
