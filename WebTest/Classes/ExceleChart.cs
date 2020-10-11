@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Spire.Xls;
 
 namespace WebTest.Classes
 {
     public class ExceleChart<T, E> : Plotter<T, E>
     {
-        Workbook workbook;
+        
         public ExceleChart()
         {
             //workbook = new Workbook();

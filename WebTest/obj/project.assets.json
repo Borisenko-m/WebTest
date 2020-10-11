@@ -1054,23 +1054,6 @@
           }
         }
       },
-      "Spire.XLS/10.9.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Drawing.Common": "4.7.0",
-          "System.Text.Encoding.CodePages": "4.7.0"
-        },
-        "compile": {
-          "lib/netcoreapp3.0/Spire.License.dll": {},
-          "lib/netcoreapp3.0/Spire.Pdf.dll": {},
-          "lib/netcoreapp3.0/Spire.XLS.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.0/Spire.License.dll": {},
-          "lib/netcoreapp3.0/Spire.Pdf.dll": {},
-          "lib/netcoreapp3.0/Spire.XLS.dll": {}
-        }
-      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3998,56 +3981,6 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.2.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
-      ]
-    },
-    "Spire.XLS/10.9.0": {
-      "sha512": "4RCTslmQvKByxhhvmdM6RArkZ5Ltu0K5evTjP9ombfSrkLP0Car7CLp6dbvc1KJOfaxQiS7XB6b5sAkFsgA56A==",
-      "type": "package",
-      "path": "spire.xls/10.9.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/MonoAndroid/Spire.License.dll",
-        "lib/MonoAndroid/Spire.License.xml",
-        "lib/MonoAndroid/Spire.Pdf.dll",
-        "lib/MonoAndroid/Spire.Pdf.xml",
-        "lib/MonoAndroid/Spire.XLS.dll",
-        "lib/MonoAndroid/Spire.XLS.xml",
-        "lib/net40/Spire.Common.XML",
-        "lib/net40/Spire.Common.dll",
-        "lib/net40/Spire.License.dll",
-        "lib/net40/Spire.License.xml",
-        "lib/net40/Spire.Pdf.dll",
-        "lib/net40/Spire.Pdf.xml",
-        "lib/net40/Spire.XLS.XML",
-        "lib/net40/Spire.XLS.dll",
-        "lib/netcoreapp2.0/Spire.License.dll",
-        "lib/netcoreapp2.0/Spire.License.xml",
-        "lib/netcoreapp2.0/Spire.Pdf.dll",
-        "lib/netcoreapp2.0/Spire.Pdf.xml",
-        "lib/netcoreapp2.0/Spire.XLS.dll",
-        "lib/netcoreapp2.0/Spire.XLS.xml",
-        "lib/netcoreapp3.0/Spire.License.dll",
-        "lib/netcoreapp3.0/Spire.License.xml",
-        "lib/netcoreapp3.0/Spire.Pdf.dll",
-        "lib/netcoreapp3.0/Spire.Pdf.xml",
-        "lib/netcoreapp3.0/Spire.XLS.dll",
-        "lib/netcoreapp3.0/Spire.XLS.xml",
-        "lib/netstandard2.0/Spire.License.dll",
-        "lib/netstandard2.0/Spire.License.xml",
-        "lib/netstandard2.0/Spire.Pdf.dll",
-        "lib/netstandard2.0/Spire.Pdf.xml",
-        "lib/netstandard2.0/Spire.XLS.dll",
-        "lib/netstandard2.0/Spire.XLS.xml",
-        "lib/xamarinios/Spire.License.dll",
-        "lib/xamarinios/Spire.License.xml",
-        "lib/xamarinios/Spire.Pdf.dll",
-        "lib/xamarinios/Spire.Pdf.xml",
-        "lib/xamarinios/Spire.XLS.dll",
-        "lib/xamarinios/Spire.XLS.xml",
-        "license.txt",
-        "spire.xls.10.9.0.nupkg.sha512",
-        "spire.xls.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -7933,8 +7866,7 @@
       "EPPlus >= 5.3.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
       "Pomelo.EntityFrameworkCore.MySql >= 3.2.1",
-      "Pomelo.EntityFrameworkCore.MySql.Design >= 1.1.2",
-      "Spire.XLS >= 10.9.0"
+      "Pomelo.EntityFrameworkCore.MySql.Design >= 1.1.2"
     ]
   },
   "packageFolders": {
@@ -7993,10 +7925,6 @@
           "Pomelo.EntityFrameworkCore.MySql.Design": {
             "target": "Package",
             "version": "[1.1.2, )"
-          },
-          "Spire.XLS": {
-            "target": "Package",
-            "version": "[10.9.0, )"
           }
         },
         "imports": [

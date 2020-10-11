@@ -114,9 +114,6 @@ C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Pomelo.Entit
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.Design.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Pomelo.JsonObject.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Spire.License.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Spire.Pdf.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\Spire.XLS.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll

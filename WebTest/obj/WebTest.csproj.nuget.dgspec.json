@@ -56,10 +56,6 @@
             "Pomelo.EntityFrameworkCore.MySql.Design": {
               "target": "Package",
               "version": "[1.1.2, )"
-            },
-            "Spire.XLS": {
-              "target": "Package",
-              "version": "[10.9.0, )"
             }
           },
           "imports": [

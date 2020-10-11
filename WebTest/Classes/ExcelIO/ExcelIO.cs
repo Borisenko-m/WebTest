@@ -20,7 +20,10 @@ namespace WebTest.Classes.ExcelIO
         {
             var cat = @"C:\Users\davil\source\repos\WebTest";
             Path = cat + "buffer" + ".xlsx";
-            var fs = new FileStream(Path, FileMode.Create ,FileAccess.ReadWrite);
+
+            var fs = File.Exists(Path) ?
+                new FileStream(Path, FileMode.Truncate, FileAccess.ReadWrite) :
+                new FileStream(Path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
             using var package = new ExcelPackage(fs);
 
             var sheet = package.Workbook.Worksheets.Add("My Sheet");
@@ -39,9 +42,5 @@ namespace WebTest.Classes.ExcelIO
             return Path;
         }
 
-        ~ExcelIO()
-        {
-            File.Delete(Path);
-        }
     }
 }
