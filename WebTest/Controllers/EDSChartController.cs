@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Text.Json;
 using WebTest.Models;
-
+using WebTest.Classes.ExcelIO;
 namespace WebTest.Controllers
 {
     [Route("api/[controller]")]
@@ -24,7 +24,13 @@ namespace WebTest.Controllers
             "Отклонено", "Импортирована с ЕДС", "Контроль ГЖИ: Внеплановая проверка",
             "Закрыто (ГЖИ)", "Отправлено в добродел"
         };
-
+        private const string JsonTest = @"{
+                                             type: 'Все',
+                                             category: 'Классификаторы',
+                                             specification: ['item1'],
+                                             from: '2020-10-09',
+                                             to: '2020-10-15'
+                                           }";
         private IEnumerable<string> categories = new List<string>() { "Компании", "Адреса", "Классификаторы" };
         public Dictionary<string, IEnumerable<string>> specifications { get; set; } = new Dictionary<string, IEnumerable<string>>()
         {
@@ -32,9 +38,6 @@ namespace WebTest.Controllers
             {"адреса", new List<string>() { "Регион", "Район", "Город", "Улица" }},
             {"классификаторы", new List<string>() { "Классификаторы" }}
         };
-
-
-
 
         //апишка для поиска типов, категории и получения фильтров
         //https://localhost:5001/api/EDSChart/?type=Все&catrgory=Адреса&method=2 - возвращает фильтры
@@ -72,12 +75,13 @@ namespace WebTest.Controllers
 
         }
 
-        //апишка для поиска по разным фильтрам
+        //                      апишка для поиска по разным фильтрам
         //https://localhost:5001/api/EDSChart/specifications/?category=компании&spec=    получаем список всех компании
         //https://localhost:5001/api/EDSChart/specifications/?category=компании&spec=а   получаем список всех компании начинающих на "а"
-        //https://localhost:5001/api/EDSChart/specifications/?category=адреса&spec=     получаем список всех регионов начинающих на "а"
+        //https://localhost:5001/api/EDSChart/specifications/?category=адреса&spec=      получаем список всех регионов начинающих на "а"
         //https://localhost:5001/api/EDSChart/specifications/?category=адреса&spec=а-    получаем список всех районов, которые принадлежать региону "а"
         //https://localhost:5001/api/EDSChart/specifications/?category=адреса&spec=а-н   получаем список всех районов начинающих на "н", которые принадлежать региону "а"
+        
         [HttpGet("specifications")]
         public IEnumerable<string?> Get(string category, string spec)
         {
@@ -108,9 +112,7 @@ namespace WebTest.Controllers
                 default:
                     return new List<string>();
             }
-
         }
-
 
         // POST: api/EDSChart
         //получаем из фрона JSON с конфигурации отчета (тип, категория, фильтры (спецификации) и дату)
@@ -122,20 +124,33 @@ namespace WebTest.Controllers
             ReportConfiguration reportModel;
             reportModel = JsonSerializer.Deserialize<ReportConfiguration>(value);
             reportModel.SpecificationsToLower();
-            return new Reports(DBSets).GetReport(reportModel);
+
+            return new ModelToJson<ApplicationModel>()
+            {
+                Models = new Reports(DBSets).GetReport(reportModel)
+            }.JsonToString();
         }
 
-
-        // POST: api/EDSChart/download
-        //пока не работает
-        [HttpPost("download")]
-        public string? PostDownload(string value)
+        // POST: api/EDSChart/download/?
+        [HttpPost("{name}.xlsx")]
+        public IActionResult PostDownload([FromBody] object fromBody)
         {
-            ReportConfiguration reportModel;
-            if (value == null || value.Length == 0) reportModel = new ReportConfiguration();
-            else reportModel = JsonSerializer.Deserialize<ReportConfiguration>(value);
-            return new Reports(DBSets).GetReport(reportModel);
-        }
+            var value = fromBody.ToString().Replace("\n", "");
+            var reportModel =
+                (value is null || value == "") ?
+                new ReportConfiguration() :
+                JsonSerializer.Deserialize<ReportConfiguration>(value);
 
+            var exIO = new ExcelIO<ApplicationModel>("file", value);  
+            exIO.Execute(new Reports(DBSets).GetReport(reportModel));
+
+            return new PhysicalFileResult(exIO.Path,"file/xlsx");
+        }
+        // POST: api/EDSChart/jsonTest/?
+        [HttpPost("jsonTest")]
+        public void PostDownload(string value, bool a)
+        {
+            Console.WriteLine(value);
+        }
     }
 }
