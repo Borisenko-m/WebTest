@@ -29,7 +29,7 @@ class DBSets : DbContext
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySql("server=localhost;UserId=root;Password=qweasd123;database=Testx247;");
+        optionsBuilder.UseMySql("server=192.168.1.39;UserId=root;Password=3rfbR6RBM;database=Testx247;");
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

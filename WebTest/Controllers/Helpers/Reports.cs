@@ -19,25 +19,25 @@ class Reports
         DBSets = sets;
     }
 
-    public string? GetReport(ReportConfiguration report)
+    public IEnumerable<ApplicationModel> GetReport(ReportConfiguration report)
     {
         switch (report.Category.ToLower())
         {
             case "компании":
-                return GetReportByCompanies(report);
+                return GetAppByCompanies(report);
             case "адреса":
-                return GetReportByAddresses(report);
+                return GetAppByAddresses(report);
             case "классификаторы":
-                return GetReportByClassifiers(report);
+                return GetAppByClassifiers(report);
             default:
-                return "";
+                return new List<ApplicationModel>();
 
         }
     }
 
-    public string? GetReportByCompanies(ReportConfiguration report)
+    public IEnumerable<ApplicationModel> GetAppByCompanies(ReportConfiguration report)
     {
-        var result =
+       return 
             from application in DBSets.Applications
             join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
             join Address in DBSets.Addresses on application.AddressID equals Address.AddressID
@@ -52,7 +52,7 @@ class Reports
             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
             where report.Specifications.Contains(Company.Name.ToLower()) || report.Specifications.Count() == 0
 
-            select new ReportModel()
+            select new ApplicationModel()
             {
                 ApplicationID = application.ApplicationID.ToString(),
                 CreatedAt = application.CreatedAt.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
@@ -63,14 +63,12 @@ class Reports
                 Company = Company.Name,
                 Description = application.Description.Replace("<p>", "").Replace("</p>", "")
             };
-
-        return new ModelToJson<ReportModel>() { Models = result.Select(l => l) }.JsonToString();
     }
 
-    public string? GetReportByClassifiers(ReportConfiguration report)
+    public IEnumerable<ApplicationModel> GetAppByClassifiers(ReportConfiguration report)
     {
         IEnumerable<ulong> classifiersList = GetClassifiersID(report);
-        var result =
+        return
             from application in DBSets.Applications
             join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
             join Address in DBSets.Addresses on application.AddressID equals Address.AddressID
@@ -82,10 +80,11 @@ class Reports
             join Classifier in DBSets.Classifiers on application.ClassifierID equals Classifier.ClassifierID
             join User in DBSets.Users on application.UserID equals User.UserID
             join Company in DBSets.Companies on application.CompanyID equals Company.CompanyID
+
             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
             where classifiersList.Contains(Classifier.ClassifierID) || classifiersList.Contains((ulong)Classifier.ParentID) || report.Specifications.Count() == 0
 
-            select new ReportModel()
+            select new ApplicationModel()
             {
                 ApplicationID = application.ApplicationID.ToString(),
                 CreatedAt = application.CreatedAt.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
@@ -97,13 +96,13 @@ class Reports
                 Description = application.Description.Replace("<p>", "").Replace("</p>", "")
             };
 
-        return new ModelToJson<ReportModel>() { Models = result.Select(l => l) }.JsonToString();
+            
     }
 
-    public string? GetReportByAddresses(ReportConfiguration report)
+    public IEnumerable<ApplicationModel> GetAppByAddresses(ReportConfiguration report)
     {
         IEnumerable<ulong> addressesList = GetAddressesID(report);
-        var result =
+        return
             from application in DBSets.Applications
             join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
             join Address in DBSets.Addresses on application.AddressID equals Address.AddressID
@@ -119,7 +118,7 @@ class Reports
             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
             where addressesList.Contains(application.AddressID) || report.Specifications.Count() == 0
 
-            select new ReportModel()
+            select new ApplicationModel()
             {
                 ApplicationID = application.ApplicationID.ToString(),
                 CreatedAt = application.CreatedAt.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
@@ -130,8 +129,6 @@ class Reports
                 Company = Company.Name,
                 Description = application.Description.Replace("<p>", "").Replace("</p>", "")
             };
-
-        return new ModelToJson<ReportModel>() { Models = result.Select(l => l) }.JsonToString();
     }
 
     private IEnumerable<ulong> GetClassifiersID(ReportConfiguration report)

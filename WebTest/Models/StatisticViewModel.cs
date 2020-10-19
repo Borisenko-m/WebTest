@@ -8,7 +8,6 @@ namespace WebTest.Models
 {
     public class StatisticViewModel 
     {
-
         public IEnumerable<string> Layers { get; set; } = new List<string>() { "" };
         public IEnumerable<string> ResearchType { get; set; } = new List<string>() { "" };
         public IEnumerable<string> ResearchCriterion { get; set; } = new List<string>() { "" };

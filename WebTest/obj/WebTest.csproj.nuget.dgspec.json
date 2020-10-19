@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\WebTest\\WebTest\\WebTest.csproj": {}
+    "C:\\Users\\davil\\source\\repos\\WebTest\\WebTest\\WebTest.csproj": {}
   },
   "projects": {
-    "C:\\WebTest\\WebTest\\WebTest.csproj": {
+    "C:\\Users\\davil\\source\\repos\\WebTest\\WebTest\\WebTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\WebTest\\WebTest\\WebTest.csproj",
+        "projectUniqueName": "C:\\Users\\davil\\source\\repos\\WebTest\\WebTest\\WebTest.csproj",
         "projectName": "WebTest",
-        "projectPath": "C:\\WebTest\\WebTest\\WebTest.csproj",
-        "packagesPath": "C:\\Users\\basha\\.nuget\\packages\\",
-        "outputPath": "C:\\WebTest\\WebTest\\obj\\",
+        "projectPath": "C:\\Users\\davil\\source\\repos\\WebTest\\WebTest\\WebTest.csproj",
+        "packagesPath": "C:\\Users\\davil\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\davil\\source\\repos\\WebTest\\WebTest\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\basha\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\davil\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -38,6 +41,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.4.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
@@ -49,10 +56,6 @@
             "Pomelo.EntityFrameworkCore.MySql.Design": {
               "target": "Package",
               "version": "[1.1.2, )"
-            },
-            "Spire.XLS": {
-              "target": "Package",
-              "version": "[10.9.0, )"
             }
           },
           "imports": [
@@ -73,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
