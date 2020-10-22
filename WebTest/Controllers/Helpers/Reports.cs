@@ -61,6 +61,7 @@ class Reports
                 UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
                 UserPhone = User.PhoneNumber,
                 Company = Company.Name,
+                ApplicationStatus = ApplicationStatus.Name,
                 Description = application.Description.Replace("<p>", "").Replace("</p>", "")
             };
     }
@@ -83,7 +84,7 @@ class Reports
 
             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
             where classifiersList.Contains(Classifier.ClassifierID) || classifiersList.Contains((ulong)Classifier.ParentID) || report.Specifications.Count() == 0
-
+            
             select new ApplicationModel()
             {
                 ApplicationID = application.ApplicationID.ToString(),
@@ -93,6 +94,7 @@ class Reports
                 UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
                 UserPhone = User.PhoneNumber,
                 Company = Company.Name,
+                ApplicationStatus = ApplicationStatus.Name,
                 Description = application.Description.Replace("<p>", "").Replace("</p>", "")
             };
 
@@ -127,6 +129,7 @@ class Reports
                 UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
                 UserPhone = User.PhoneNumber,
                 Company = Company.Name,
+                ApplicationStatus = ApplicationStatus.Name,
                 Description = application.Description.Replace("<p>", "").Replace("</p>", "")
             };
     }
