@@ -110,7 +110,6 @@ namespace WebTest.Classes
                                 string borderline = "solid",
                                 string borderColor = "black")
         {
-            var x = new ExceleChart<string, string>();
             string GetPrefix(string s) => string.Concat(s.Where(c => char.IsDigit(c)));
             string GetPostfix(string s) => string.Concat(s.Where(c => char.IsLetter(c)));
             string GetRGBAColor(Color color) => $"rgba({color.R}, {color.G}, {color.B}, {color.A})";
