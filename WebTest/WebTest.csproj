@@ -91,6 +91,7 @@
 
   <ItemGroup>
     <Folder Include="Classes\DBSync\" />
+    <Folder Include="Classes\DBSync\EFDatasets\" />
   </ItemGroup>
 
 
