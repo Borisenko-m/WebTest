@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class CompanyHasAddress
 {
-
     public ulong CompanyID { get; set; }
     public Company Company { get; set; }
 

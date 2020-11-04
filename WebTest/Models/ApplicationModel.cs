@@ -14,7 +14,6 @@ namespace WebTest.Models
         public string UserFullName { get; set; }
         public string UserPhone { get; set; }
         public string Company { get; set; }
-        public string ApplicationStatus { get; set; }
         public string Description { get; set; }
     }
 }

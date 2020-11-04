@@ -18,8 +18,6 @@ public class User
     [Column(TypeName = "varchar(50)")]
     public string PhoneNumber { get; set; }
 
-    public string FullName { get; set; }
-
     [Timestamp]
     public byte[] CreatedAt { get; set; }
 

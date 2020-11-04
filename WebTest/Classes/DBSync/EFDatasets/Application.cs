@@ -5,30 +5,27 @@ using System;
 
 public class Application
 {
-    public ulong ApplicationID { get; set; } = default;
+    public ulong? ApplicationID { get; set; }
 
-    public string Description { get; set; } = default;
+    public string Description { get; set; }
 
-    public ulong UserID { get; set; } = default;
-    public User User { get; set; } = default;
+    public ulong? UserID { get; set; }
+    public User User { get; set; }
 
-    public ulong AddressID { get; set; } = default;
-    public Address Address { get; set; } = default;
+    public ulong? AddressID { get; set; }
+    public Address Address { get; set; }
 
+    public ulong? ClassifierID { get; set; }
+    public Classifier Classifier { get; set; }
 
-    public ulong ClassifierID { get; set; } = default;
-    public Classifier Classifier { get; set; } = default;
+    public ulong ApplicationStatusID { get; set; }
+    public ApplicationStatus ApplicationStatus { get; set; }
 
+    public ulong? CompanyID { get; set; }
+    public Company Company { get; set; }
 
-    public ulong ApplicationStatusID { get; set; } = default;
-    public ApplicationStatus ApplicationStatus { get; set; } = default;
-
-
-    public ulong CompanyID { get; set; } = default;
-    public Company Company { get; set; } = default;
-
-    public DateTime CreatedAt { get; set; } = default;
-    public DateTime? ClosedAt { get; set; } = default;
+    public DateTime CreatedAt { get; set; }
+    public DateTime? ClosedAt { get; set; }
 
     [NotMapped]
     public Dictionary<string, string> KeyValuePairs { get; set; } = new Dictionary<string, string>()

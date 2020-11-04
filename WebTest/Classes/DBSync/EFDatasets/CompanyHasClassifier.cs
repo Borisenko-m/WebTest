@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class CompanyHasClassifier
 {
-
     public ulong CompanyID { get; set; }
     public Company Company { get; set; }
 
@@ -21,5 +20,5 @@ public class CompanyHasClassifier
         {"mc_id","CompanyID"},
         {"classifier_id","ClassifierID"}
     };
-    
+   
 }

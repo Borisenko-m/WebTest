@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Address
 {
-    public ulong AddressID { get; set; }
+    public ulong? AddressID { get; set; } 
     public int? ResidenceNumber { get; set; }
     public int? FloorsNumber { get; set; }
     public int? ApartmentsNumber { get; set; }

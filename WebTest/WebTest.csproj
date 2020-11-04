@@ -83,7 +83,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="5.3.2" />
+    <PackageReference Include="EPPlus" Version="5.4.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
@@ -91,6 +91,7 @@
 
   <ItemGroup>
     <Folder Include="Classes\DBSync\" />
+    <Folder Include="Classes\DBSync\EFDatasets\" />
   </ItemGroup>
 
 

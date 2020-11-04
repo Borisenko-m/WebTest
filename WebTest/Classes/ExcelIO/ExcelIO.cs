@@ -4,43 +4,51 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using OfficeOpenXml;
-using OfficeOpenXml.Drawing;
 using OfficeOpenXml.Drawing.Chart;
-using System.Web;
+using WebTest.Models;
 namespace WebTest.Classes.ExcelIO
 {
-    public class ExcelIO
+    public class ExcelIO<Model>
     {
-        public ExcelIO(string name) { Name = name; }
-
-        public string Name { get; set; }
-        public string Path { get; set; }
-
-        public string Test(string name)
+        /// <summary>
+        /// Class that convert json to xls
+        /// </summary>
+        /// <param name="name">Name of file.</param>
+        public ExcelIO(string name, string content)
         {
-            var cat = @"C:\Users\davil\source\repos\WebTest";
-            Path = cat + "buffer" + ".xlsx";
 
-            var fs = File.Exists(Path) ?
-                new FileStream(Path, FileMode.Truncate, FileAccess.ReadWrite) :
-                new FileStream(Path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            using var package = new ExcelPackage(fs);
+            var path = @$"..\{name}.xlsx";
+            FileStream = File.Exists(path) ?
+                new FileStream(path, FileMode.Truncate, FileAccess.ReadWrite) :
+                new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
 
-            var sheet = package.Workbook.Worksheets.Add("My Sheet");
-            sheet.Cells["A1"].Value = $"Hello {name}!";
-            sheet.Cells["A2"].Value = "Hello fcking World!";
-
-            var chart = sheet.Drawings.AddChart("", eChartType.ColumnStacked);
-            chart.SetPosition(3, 0, 0, 0);
-            chart.Description = "3e432432432";
-            chart.Name = "2329199191911kkk1k1kk1";
-            
-
-            // Save to file
-            package.Save();
-            fs.Close();
-            return Path;
+            Path = FileStream.Name;
         }
 
+
+        public string Path { get; set; }
+        FileStream FileStream { get; set; }
+
+        public void Execute(IEnumerable<Model> models)
+        {
+            var type = typeof(Model);
+            IEnumerable<object> fields = default; 
+            var i = 0;
+            var j = 0;
+            using var package = new ExcelPackage(FileStream);
+            var sheet = package.Workbook.Worksheets.Add("My Sheet");
+            foreach (var model in models)
+            {
+                fields = type.GetFields().Select(l => l.GetValue(model));
+                foreach (var item in fields)
+                {
+                    sheet.Cells[i,j++].Value = item;
+                }
+                i++;
+            }
+            // Save to file
+            package.Save();
+            FileStream.Close();
+        }
     }
 }

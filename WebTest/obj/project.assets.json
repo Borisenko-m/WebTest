@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "EPPlus/5.3.2": {
+      "EPPlus/5.4.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Json": "3.1.5",
@@ -2395,15 +2395,15 @@
     }
   },
   "libraries": {
-    "EPPlus/5.3.2": {
-      "sha512": "h9F5lLP0KWTnVAxKlG7XQXUiUCtf5uTLx3DlrTVN3O68Xk/unslL8azAwgw47iZgzxHQw9S2mhuzG7dA1XL/JQ==",
+    "EPPlus/5.4.0": {
+      "sha512": "JMgS03PHMhOmnVdRdE0gsycuVjt54jdP1Yy1Y4mszQxRC19Upoz/o/ie3SwfLoU/zxtA+HWwHw7KJ6Uc5et72A==",
       "type": "package",
-      "path": "epplus/5.3.2",
+      "path": "epplus/5.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "EPPlusLogo.png",
-        "epplus.5.3.2.nupkg.sha512",
+        "epplus.5.4.0.nupkg.sha512",
         "epplus.nuspec",
         "lib/net35/EPPlus.dll",
         "lib/net35/EPPlus.xml",
@@ -7863,7 +7863,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "EPPlus >= 5.3.2",
+      "EPPlus >= 5.4.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
       "Pomelo.EntityFrameworkCore.MySql >= 3.2.1",
       "Pomelo.EntityFrameworkCore.MySql.Design >= 1.1.2"
@@ -7912,7 +7912,7 @@
         "dependencies": {
           "EPPlus": {
             "target": "Package",
-            "version": "[5.3.2, )"
+            "version": "[5.4.0, )"
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",

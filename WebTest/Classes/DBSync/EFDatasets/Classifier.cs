@@ -6,6 +6,8 @@ public class Classifier
 {
     public ulong ClassifierID { get; set; }
 
+    public int ParentID { get; set; }
+
     [Required, Column(TypeName = "varchar(200)")]
     public string Name { get; set; }
 
@@ -15,9 +17,6 @@ public class Classifier
     [Required, Column(TypeName = "varchar(45)")]
     public string AppDecisionTime { get; set; }
 
-    [Required]
-    public int ParentID { get; set; }
-
     [Timestamp]
     public byte[] CreatedAt { get; set; }
 
@@ -25,10 +24,10 @@ public class Classifier
     public Dictionary<string, string> KeyValuePairs { get; set; } = new Dictionary<string, string>()
     {
         {"id","ClassifierID"},
+        {"parent_id","ParentID"},
         {"name","Name"},
         {"application_acceptance_time","AppAcceptanceTime"},
-        {"application_decision_time","AppDecisionTime"},
-        {"parent_id","ParentID"}
+        {"application_decision_time","AppDecisionTime"}
     };
 
 }

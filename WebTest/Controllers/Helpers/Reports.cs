@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Runtime.Serialization.Json;
 using Microsoft.AspNetCore.Mvc;
 using System.Web;
+
 using WebTest.Models;
 using Microsoft.EntityFrameworkCore.Internal;
 
@@ -21,6 +22,7 @@ class Reports
 
     public IEnumerable<ApplicationModel> GetReport(ReportConfiguration report)
     {
+        
         switch (report.Category.ToLower())
         {
             case "компании":
@@ -61,7 +63,6 @@ class Reports
                 UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
                 UserPhone = User.PhoneNumber,
                 Company = Company.Name,
-                ApplicationStatus = ApplicationStatus.Name,
                 Description = application.Description.Replace("<p>", "").Replace("</p>", "")
             };
     }
@@ -84,7 +85,7 @@ class Reports
 
             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
             where classifiersList.Contains(Classifier.ClassifierID) || classifiersList.Contains((ulong)Classifier.ParentID) || report.Specifications.Count() == 0
-            
+
             select new ApplicationModel()
             {
                 ApplicationID = application.ApplicationID.ToString(),
@@ -94,7 +95,6 @@ class Reports
                 UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
                 UserPhone = User.PhoneNumber,
                 Company = Company.Name,
-                ApplicationStatus = ApplicationStatus.Name,
                 Description = application.Description.Replace("<p>", "").Replace("</p>", "")
             };
 
@@ -103,7 +103,8 @@ class Reports
 
     public IEnumerable<ApplicationModel> GetAppByAddresses(ReportConfiguration report)
     {
-        IEnumerable<ulong> addressesList = GetAddressesID(report);
+        
+        IEnumerable<ulong?> addressesList = GetAddressesID(report);
         return
             from application in DBSets.Applications
             join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
@@ -129,7 +130,6 @@ class Reports
                 UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
                 UserPhone = User.PhoneNumber,
                 Company = Company.Name,
-                ApplicationStatus = ApplicationStatus.Name,
                 Description = application.Description.Replace("<p>", "").Replace("</p>", "")
             };
     }
@@ -150,10 +150,10 @@ class Reports
         list.AddRange(result.Select(l => l.Classifier));
         return list;
     }
-    private IEnumerable<ulong> GetAddressesID(ReportConfiguration report)
+    private IEnumerable<ulong?> GetAddressesID(ReportConfiguration report)
     {
         List<string> spec = report.Specifications.ToList();
-        List<ulong> list = new List<ulong>();
+        List<ulong?> list = new List<ulong?>();
         for (int i = 0; i < spec.Count && i + 3 < spec.Count; i += 4)
         {
             var result =

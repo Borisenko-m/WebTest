@@ -29,7 +29,7 @@ class DBSets : DbContext
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySql("server=dcorpse.keenetic.pro;UserId=root;Password=3rfbR6RBM;database=Testx247;");
+        optionsBuilder.UseMySql("server=dcorpse.keenetic.pro;UserId=dev;Password=3rfbR6RBM!;database=eds_db;");
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
