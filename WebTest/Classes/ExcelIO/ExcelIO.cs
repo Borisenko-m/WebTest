@@ -28,13 +28,28 @@ namespace WebTest.Classes.ExcelIO
 
         public string Path { get; set; }
         FileStream FileStream { get; set; }
+        public void Test()
+        {
+            using var package = new ExcelPackage(FileStream);
+            var sheet = package.Workbook.Worksheets.Add("My Sheet");
+            
+            for (int i = 1; i <= 10; i++)
+            {
+                for (int j = 1; j <= 10; j++)
+                {
+                    sheet.SetValue(i, j, i + " " + j);
+                }
+            }
 
+            package.Save();
+            FileStream.Close();
+        }
         public void Execute(IEnumerable<Model> models)
         {
             var type = typeof(Model);
-            IEnumerable<object> fields = default; 
-            var i = 0;
-            var j = 0;
+            IEnumerable<object> fields = default;
+            var i = 1;
+            var j = 1;
             using var package = new ExcelPackage(FileStream);
             var sheet = package.Workbook.Worksheets.Add("My Sheet");
             foreach (var model in models)
@@ -42,7 +57,7 @@ namespace WebTest.Classes.ExcelIO
                 fields = type.GetFields().Select(l => l.GetValue(model));
                 foreach (var item in fields)
                 {
-                    sheet.Cells[i,j++].Value = item;
+                    sheet.SetValue(i, j++, item);
                 }
                 i++;
             }
