@@ -46,24 +46,23 @@ namespace WebTest.Classes.ExcelIO
         }
         public void Execute(IEnumerable<Model> models)
         {
-            //var type = typeof(Model);
-            //IEnumerable<object> fields = default;
-            //var i = 1;
-            //var j = 1;
-            //using var package = new ExcelPackage(FileStream);
-            //var sheet = package.Workbook.Worksheets.Add("My Sheet");
-            //foreach (var model in models)
-            //{
-            //    fields = type.GetFields().Select(l => l.GetValue(model));
-            //    foreach (var item in fields)
-            //    {
-            //        sheet.SetValue(i, j++, item);
-            //    }
-            //    i++;
-            //}
-            //// Save to file
-            //package.Save();
-            //FileStream.Close();
+            var type = typeof(Model);
+            IEnumerable<object> fields = default;
+            var i = 1;
+            var j = 1;
+            
+            foreach (var model in models)
+            {
+                fields = type.GetFields().Select(l => l.GetValue(model));
+                foreach (var item in fields)
+                {
+                    Xls.SetCellValue(i, j++, item);
+                }
+                i++;
+            }
+            // Save to file
+            Xls.Save(FileStream, TFileFormats.Xlsx);
+            FileStream.Close();
         }
     }
 }
