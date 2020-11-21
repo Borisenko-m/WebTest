@@ -82,6 +82,7 @@ namespace WebTest.Controllers
         //https://localhost:5001/api/EDSChart/specifications/?category=адреса&spec=а-    получаем список всех районов, которые принадлежать региону "а"
         //https://localhost:5001/api/EDSChart/specifications/?category=адреса&spec=а-н   получаем список всех районов начинающих на "н", которые принадлежать региону "а"
         
+            
         [HttpGet("specifications")]
         public IEnumerable<string?> Get(string category, string spec)
         {
@@ -128,13 +129,14 @@ namespace WebTest.Controllers
             return new ModelToJson<ApplicationModel>()
             {
                 Models = new Reports(DBSets).GetReport(reportModel)
-            }.JsonToString();
+            }.ToString();
         }
 
         // POST: api/EDSChart/download/?
         [HttpPost("{name}.xlsx")]
-        public IActionResult PostDownload([FromBody] object fromBody)
+        public FileResult PostDownload([FromBody] object fromBody)
         {
+            
             var value = fromBody.ToString().Replace("\n", "");
             var reportModel =
                 (value is null || value == "") ?
@@ -144,16 +146,15 @@ namespace WebTest.Controllers
             var exIO = new ExcelIO<ApplicationModel>("file", value);  
             exIO.Execute(new Reports(DBSets).GetReport(reportModel));
 
-            return new PhysicalFileResult(exIO.Path,"file/xlsx");
+            return new PhysicalFileResult(exIO.Path, "application/xlsx");
         }
         [HttpGet("test")]
-        public IActionResult GetDownload(string any)
+        public FileResult GetDownload(string any)
         {
 
             var exIO = new ExcelIO<ApplicationModel>("file", "");
             exIO.Test();
-
-            return new PhysicalFileResult(exIO.Path, "file/xlsx");
+            return new PhysicalFileResult(exIO.Path, "application/xlsx"); ;
         }
         // POST: api/EDSChart/jsonTest/?
         [HttpPost("jsonTest")]

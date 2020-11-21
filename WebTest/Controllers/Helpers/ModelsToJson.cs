@@ -10,6 +10,6 @@ namespace WebTest.Models
         public IEnumerable<Model> Models { get; set; }
 
         public JsonObject<IEnumerable<Model>> GetJson() => new JsonObject<IEnumerable<Model>>(Models);
-        public string JsonToString() => new JsonObject<IEnumerable<Model>>(Models).Json;
+        public override string ToString() => new JsonObject<IEnumerable<Model>>(Models).Json;
     }
 }

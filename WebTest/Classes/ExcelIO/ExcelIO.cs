@@ -16,7 +16,7 @@ namespace WebTest.Classes.ExcelIO
         /// <param name="name">Name of file.</param>
         public ExcelIO(string name, string content)
         {
-            Xls = new XlsFile(1, TExcelFileFormat.v2016, true);
+            Xls = new XlsFile(1, TExcelFileFormat.v2010, true);
 
             var path = @$"..\{name}.xlsx";
 
@@ -40,11 +40,11 @@ namespace WebTest.Classes.ExcelIO
                     Xls.SetCellValue(i, j, i + " " + j);
                 }
             }
-            Xls.Save(FileStream, TFileFormats.Xlsx);
+            Xls.Save(FileStream);
 
             FileStream.Close();
         }
-        public void Execute(IEnumerable<Model> models)
+        public FileStream Execute(IEnumerable<Model> models)
         {
             var type = typeof(Model);
             IEnumerable<object> fields = default;
@@ -53,16 +53,18 @@ namespace WebTest.Classes.ExcelIO
             
             foreach (var model in models)
             {
-                fields = type.GetFields().Select(l => l.GetValue(model));
+                fields = type.GetProperties().Select(l => l.GetValue(model));
+                j = 1;
                 foreach (var item in fields)
                 {
-                    Xls.SetCellValue(i, j++, item);
+                    Xls.SetCellValue(i, j, item);
+                    j++;
                 }
                 i++;
             }
             // Save to file
-            Xls.Save(FileStream, TFileFormats.Xlsx);
-            FileStream.Close();
+            Xls.Save(FileStream);
+            return FileStream;
         }
     }
 }

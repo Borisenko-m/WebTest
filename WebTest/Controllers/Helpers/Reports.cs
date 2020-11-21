@@ -10,6 +10,7 @@ using System.Web;
 
 using WebTest.Models;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Query;
 
 class Reports
 {
@@ -22,7 +23,6 @@ class Reports
 
     public IEnumerable<ApplicationModel> GetReport(ReportConfiguration report)
     {
-        
         switch (report.Category.ToLower())
         {
             case "компании":
@@ -33,43 +33,92 @@ class Reports
                 return GetAppByClassifiers(report);
             default:
                 return new List<ApplicationModel>();
-
         }
+    }
+    public IEnumerable<ApplicationModel> GetAppsByFilter(FilterModel filter)
+    {
+        IEnumerable<ulong?> addressesList = GetAddressesID(filter.Addresses);
+        IEnumerable<ulong> classifiersList = GetClassifiersID(filter.Classifiers);
+
+        var seq =
+            from app in DBSets.Applications
+
+            join appStatus in DBSets.ApplicationStatuses on app.ApplicationStatusID equals appStatus.ApplicationStatusID
+            join classifiers in DBSets.Classifiers on app.ClassifierID equals classifiers.ClassifierID
+            join companies in DBSets.Companies on app.CompanyID equals companies.CompanyID
+            join users in DBSets.Users on app.UserID equals users.UserID
+
+            join addresses in DBSets.Addresses on app.AddressID equals addresses.AddressID
+            join regions in DBSets.Regions on addresses.RegionID equals regions.RegionID
+            join districts in DBSets.Districts on addresses.DistrictID equals districts.DistrictID
+            join cities in DBSets.Cities on addresses.CityID equals cities.CityID
+            join streets in DBSets.Streets on addresses.StreetID equals streets.StreetID
+            join buildings in DBSets.Buildings on addresses.BuildingID equals buildings.BuildingID
+
+            
+            where classifiersList.Contains((ulong)app.ClassifierID) || classifiersList.Count() == 0
+            where filter.Companies.Contains(companies.Name.ToLower()) || filter.Companies.Count() == 0
+            where addressesList.Contains(app.AddressID) || addressesList.Count() == 0
+
+            select new ApplicationModel()
+            {
+                ApplicationID = app.ApplicationID.ToString(),
+                Address = string.Join(" ", regions.Name, districts.Name, districts.Name, cities.Name, streets.Name, buildings.Name),
+                Classifier = classifiers.Name,
+                Company = companies.Name,
+                Status = appStatus.Name,
+                UserFullName = string.Join(" ", users.LastName, users.FirstName, users.MiddleName),
+                UserPhone = users.PhoneNumber,
+                CreatedAt = app.CreatedAt.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
+                Description = app.Description
+            };
+        var list = new List<ApplicationModel>();
+        foreach (var period in filter.Periods)
+        {
+            foreach (var item in seq)
+            {
+                if(period.CheckDate(DateTime.Parse(item.CreatedAt))) list.Add(item);
+            }
+        }
+
+        return list;
     }
 
     public IEnumerable<ApplicationModel> GetAppByCompanies(ReportConfiguration report)
     {
-       return 
-            from application in DBSets.Applications
-            join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
-            join Address in DBSets.Addresses on application.AddressID equals Address.AddressID
-            join Region in DBSets.Regions on Address.RegionID equals Region.RegionID
-            join District in DBSets.Districts on Address.DistrictID equals District.DistrictID
-            join City in DBSets.Cities on Address.CityID equals City.CityID
-            join Street in DBSets.Streets on Address.StreetID equals Street.StreetID
-            join Building in DBSets.Buildings on Address.BuildingID equals Building.BuildingID
-            join Classifier in DBSets.Classifiers on application.ClassifierID equals Classifier.ClassifierID
-            join User in DBSets.Users on application.UserID equals User.UserID
-            join Company in DBSets.Companies on application.CompanyID equals Company.CompanyID
-            where application.CreatedAt >= report.From && application.CreatedAt <= report.To
-            where report.Specifications.Contains(Company.Name.ToLower()) || report.Specifications.Count() == 0
+        return
+             from application in DBSets.Applications
+             join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
+             join Address in DBSets.Addresses on application.AddressID equals Address.AddressID
+             join Region in DBSets.Regions on Address.RegionID equals Region.RegionID
+             join District in DBSets.Districts on Address.DistrictID equals District.DistrictID
+             join City in DBSets.Cities on Address.CityID equals City.CityID
+             join Street in DBSets.Streets on Address.StreetID equals Street.StreetID
+             join Building in DBSets.Buildings on Address.BuildingID equals Building.BuildingID
+             join Classifier in DBSets.Classifiers on application.ClassifierID equals Classifier.ClassifierID
+             join User in DBSets.Users on application.UserID equals User.UserID
+             join Company in DBSets.Companies on application.CompanyID equals Company.CompanyID
 
-            select new ApplicationModel()
-            {
-                ApplicationID = application.ApplicationID.ToString(),
-                CreatedAt = application.CreatedAt.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
-                Address = Region.Name + ", " + District.Name + ", " + City.Name + ", " + Street.Name + ", " + Building.Name,
-                Classifier = Classifier.Name,
-                UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
-                UserPhone = User.PhoneNumber,
-                Company = Company.Name,
-                Description = application.Description.Replace("<p>", "").Replace("</p>", "")
-            };
+             where application.CreatedAt >= report.From && application.CreatedAt <= report.To
+             where report.Specifications.Contains(Company.Name.ToLower()) || report.Specifications.Count() == 0
+
+             select new ApplicationModel()
+             {
+                 ApplicationID = application.ApplicationID.ToString(),
+                 CreatedAt = application.CreatedAt.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss"),
+                 Address = Region.Name + ", " + District.Name + ", " + City.Name + ", " + Street.Name + ", " + Building.Name,
+                 Classifier = Classifier.Name,
+                 UserFullName = User.LastName + " " + User.FirstName + " " + User.MiddleName,
+                 UserPhone = User.PhoneNumber,
+                 Company = Company.Name,
+                 Description = application.Description.Replace("<p>", "").Replace("</p>", ""),
+                 Status = application.ApplicationStatus.Name
+             };
     }
 
     public IEnumerable<ApplicationModel> GetAppByClassifiers(ReportConfiguration report)
     {
-        IEnumerable<ulong> classifiersList = GetClassifiersID(report);
+        IEnumerable<ulong> classifiersList = GetClassifiersID(report.Specifications);
         return
             from application in DBSets.Applications
             join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
@@ -98,13 +147,13 @@ class Reports
                 Description = application.Description.Replace("<p>", "").Replace("</p>", "")
             };
 
-            
+
     }
 
     public IEnumerable<ApplicationModel> GetAppByAddresses(ReportConfiguration report)
     {
-        
-        IEnumerable<ulong?> addressesList = GetAddressesID(report);
+
+        IEnumerable<ulong?> addressesList = GetAddressesID(report.Specifications);
         return
             from application in DBSets.Applications
             join ApplicationStatus in DBSets.ApplicationStatuses on application.ApplicationStatusID equals ApplicationStatus.ApplicationStatusID
@@ -134,15 +183,15 @@ class Reports
             };
     }
 
-    private IEnumerable<ulong> GetClassifiersID(ReportConfiguration report)
+    private IEnumerable<ulong> GetClassifiersID(IEnumerable<string> report)
     {
         List<ulong> list = new List<ulong>();
         var result =
         from Classifier in DBSets.Classifiers
 
-        where report.Specifications.Contains(Classifier.Name)
+        where report.Contains(Classifier.Name)
 
-        select new 
+        select new
         {
             Classifier = Classifier.ClassifierID,
         };
@@ -150,9 +199,10 @@ class Reports
         list.AddRange(result.Select(l => l.Classifier));
         return list;
     }
-    private IEnumerable<ulong?> GetAddressesID(ReportConfiguration report)
+
+    private IEnumerable<ulong?> GetAddressesID(IEnumerable<string> adresses)
     {
-        List<string> spec = report.Specifications.ToList();
+        List<string> spec = adresses.ToList();
         List<ulong?> list = new List<ulong?>();
         for (int i = 0; i < spec.Count && i + 3 < spec.Count; i += 4)
         {
