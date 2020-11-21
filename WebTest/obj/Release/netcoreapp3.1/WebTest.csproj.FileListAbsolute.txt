@@ -9,7 +9,6 @@ C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\WebTest.dl
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\WebTest.pdb
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\WebTest.Views.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\WebTest.Views.pdb
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\EPPlus.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
@@ -27,13 +26,8 @@ C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.Logging.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Extensions.Options.dll
@@ -46,7 +40,6 @@ C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\MySqlConnector.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\NuGet.Frameworks.dll
@@ -60,10 +53,6 @@ C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\System.Com
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\System.Composition.Runtime.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\System.Composition.TypedParts.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\System.Drawing.Common.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\System.Security.Cryptography.Pkcs.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\System.Text.Encoding.CodePages.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\de\Microsoft.CodeAnalysis.resources.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\es\Microsoft.CodeAnalysis.resources.dll
@@ -116,11 +105,6 @@ C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\ru\Microso
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll
-C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 C:\Users\davil\source\repos\WebTest\WebTest\obj\Release\netcoreapp3.1\WebTest.csprojAssemblyReference.cache
 C:\Users\davil\source\repos\WebTest\WebTest\obj\Release\netcoreapp3.1\staticwebassets\WebTest.StaticWebAssets.Manifest.cache
 C:\Users\davil\source\repos\WebTest\WebTest\obj\Release\netcoreapp3.1\staticwebassets\WebTest.StaticWebAssets.xml
@@ -146,3 +130,14 @@ C:\Users\davil\source\repos\WebTest\WebTest\obj\Release\netcoreapp3.1\WebTest.Vi
 C:\Users\davil\source\repos\WebTest\WebTest\obj\Release\netcoreapp3.1\WebTest.csproj.CopyComplete
 C:\Users\davil\source\repos\WebTest\WebTest\obj\Release\netcoreapp3.1\WebTest.dll
 C:\Users\davil\source\repos\WebTest\WebTest\obj\Release\netcoreapp3.1\WebTest.pdb
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\flexcel-dnx.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\Microsoft.VisualBasic.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\debian-x64\native\libuv.so
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\fedora-x64\native\libuv.so
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\opensuse-x64\native\libuv.so
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\osx\native\libuv.dylib
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\rhel-x64\native\libuv.so
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\win7-arm\native\libuv.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\win7-x64\native\libuv.dll
+C:\Users\davil\source\repos\WebTest\WebTest\bin\Release\netcoreapp3.1\runtimes\win7-x86\native\libuv.dll

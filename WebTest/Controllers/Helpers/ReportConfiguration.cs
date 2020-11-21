@@ -8,7 +8,6 @@ namespace WebTest.Models
 {
     public class ReportConfiguration
     {
-
         [JsonPropertyName("type")]
         public string Type { get; set; }
 

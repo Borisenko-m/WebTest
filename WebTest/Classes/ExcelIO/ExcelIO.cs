@@ -16,7 +16,7 @@ namespace WebTest.Classes.ExcelIO
         /// <param name="name">Name of file.</param>
         public ExcelIO(string name, string content)
         {
-            Xls = new XlsFile(1, TExcelFileFormat.v2016, true);
+            Xls = new XlsFile(1, TExcelFileFormat.v2010, true);
 
             var path = @$"..\{name}.xlsx";
 
@@ -40,30 +40,31 @@ namespace WebTest.Classes.ExcelIO
                     Xls.SetCellValue(i, j, i + " " + j);
                 }
             }
-            Xls.Save(FileStream, TFileFormats.Xlsx);
+            Xls.Save(FileStream);
 
             FileStream.Close();
         }
-        public void Execute(IEnumerable<Model> models)
+        public FileStream Execute(IEnumerable<Model> models)
         {
-            //var type = typeof(Model);
-            //IEnumerable<object> fields = default;
-            //var i = 1;
-            //var j = 1;
-            //using var package = new ExcelPackage(FileStream);
-            //var sheet = package.Workbook.Worksheets.Add("My Sheet");
-            //foreach (var model in models)
-            //{
-            //    fields = type.GetFields().Select(l => l.GetValue(model));
-            //    foreach (var item in fields)
-            //    {
-            //        sheet.SetValue(i, j++, item);
-            //    }
-            //    i++;
-            //}
-            //// Save to file
-            //package.Save();
-            //FileStream.Close();
+            var type = typeof(Model);
+            IEnumerable<object> fields = default;
+            var i = 1;
+            var j = 1;
+            
+            foreach (var model in models)
+            {
+                fields = type.GetProperties().Select(l => l.GetValue(model));
+                j = 1;
+                foreach (var item in fields)
+                {
+                    Xls.SetCellValue(i, j, item);
+                    j++;
+                }
+                i++;
+            }
+            // Save to file
+            Xls.Save(FileStream);
+            return FileStream;
         }
     }
 }
