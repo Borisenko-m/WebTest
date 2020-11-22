@@ -9,6 +9,15 @@ namespace WebTest.Models
 {
     public class FilterModel
     {
+        public FilterModel()
+        {
+            Statuses = new List<string>();
+            Classifiers = new List<string>();
+            Companies = new List<string>();
+            Addresses = new List<string>();
+            Periods = new List<Period>();
+        }
+
         [JsonPropertyName("Statuses")]
         public IEnumerable<string> Statuses { get; set; }
 

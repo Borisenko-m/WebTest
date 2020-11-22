@@ -24,13 +24,6 @@ namespace WebTest.Controllers
             "Отклонено", "Импортирована с ЕДС", "Контроль ГЖИ: Внеплановая проверка",
             "Закрыто (ГЖИ)", "Отправлено в добродел"
         };
-        private const string JsonTest = @"{
-                                             type: 'Все',
-                                             category: 'Классификаторы',
-                                             specification: ['item1'],
-                                             from: '2020-10-09',
-                                             to: '2020-10-15'
-                                           }";
         private IEnumerable<string> categories = new List<string>() { "Компании", "Адреса", "Классификаторы" };
         public Dictionary<string, IEnumerable<string>> specifications { get; set; } = new Dictionary<string, IEnumerable<string>>()
         {
@@ -114,9 +107,9 @@ namespace WebTest.Controllers
                     return new List<string>();
             }
         }
-
+        
         [HttpPost("GetAppsByFilter")]
-        public string GetTable([FromBody] object fromBody)
+        public string Get([FromBody] object fromBody)
         {
             var model = new StatisticModel();
             var value = fromBody.ToString().Replace("\n", "");
@@ -161,7 +154,6 @@ namespace WebTest.Controllers
         [HttpGet("test")]
         public FileResult GetDownload(string any)
         {
-
             var exIO = new ExcelIO<ApplicationModel>("file", "");
             exIO.Test();
             return new PhysicalFileResult(exIO.Path, "application/xlsx"); ;
