@@ -115,6 +115,16 @@ namespace WebTest.Controllers
             }
         }
 
+        [HttpPost("GetAppsByFilter")]
+        public string GetTable([FromBody] object fromBody)
+        {
+            var model = new StatisticModel();
+            var value = fromBody.ToString().Replace("\n", "");
+            var filter = JsonSerializer.Deserialize<FilterModel>(value);
+            var report = new Reports(DBSets).GetAppsByFilter(filter).ToList();
+            return new ModelToJson<ApplicationModel>() { Models = report }.ToString();
+        }
+
         // POST: api/EDSChart
         //получаем из фрона JSON с конфигурации отчета (тип, категория, фильтры (спецификации) и дату)
         [HttpPost]
