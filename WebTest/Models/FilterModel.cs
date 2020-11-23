@@ -15,7 +15,7 @@ namespace WebTest.Models
             Classifiers = new List<string>();
             Companies = new List<string>();
             Addresses = new List<string>();
-            Periods = new List<Period>();
+            Periods = new List<PeriodModel>();
         }
 
         [JsonPropertyName("Statuses")]
@@ -31,19 +31,7 @@ namespace WebTest.Models
         public IEnumerable<string> Addresses { get; set; }
 
         [JsonPropertyName("Periods")]
-        public IEnumerable<Period> Periods { get; set; }
+        public IEnumerable<PeriodModel> Periods { get; set; }
 
-
-        public class Period
-        {
-            public bool CheckDate(DateTime time) =>
-                time >= From && time <= To;
-
-            [JsonPropertyName("From")]
-            public DateTime From { get; set; }
-
-            [JsonPropertyName("To")]
-            public DateTime To { get; set; }
-        }
     }
 }

@@ -15,7 +15,8 @@ namespace WebTest.Controllers
     public class EDSController : ControllerBase
     {
         DBSets DBSets = new DBSets();
-
+        IEnumerable<ApplicationModel> Applications { get; set; }
+        FilterModel Filter { get; set; }
         private IEnumerable<string> types = new List<string>() {
             "Все", "Принята", "Архив", "В работе", "Выполнено без акта",
             "Выполнено с актом", "Закрыта без подтверждения",
@@ -83,41 +84,69 @@ namespace WebTest.Controllers
             if (spec == null) spec = "";
             string[] specifications = spec.Split("-");
 
-            switch (category.ToLower())
+            return (category.ToLower()) switch
             {
-                case "компании":
-                    return new Reports(DBSets).GetCompanies(specifications[0]);
-                case "адреса":
-                    switch (specifications.Length)
-                    {
-                        case 1:
-                            return new Reports(DBSets).GetRegions(specifications[0]);
-                        case 2:
-                            return new Reports(DBSets).GetDistricts(specifications[0], specifications[1]);
-                        case 3:
-                            return new Reports(DBSets).GetCities(specifications[0], specifications[1], specifications[2]);
-                        case 4:
-                            return new Reports(DBSets).GetStreets(specifications[0], specifications[1], specifications[2], specifications[3]);
-                        default:
-                            return new List<string>();
-                    }
-                case "классификаторы":
-                    return new Reports(DBSets).GetClassifiers(specifications[0]);
-                default:
-                    return new List<string>();
-            }
+                "компании" => new Reports(DBSets).GetCompanies(specifications[0]),
+                "адреса" => specifications.Length switch
+                {
+                    1 => new Reports(DBSets).GetRegions(specifications[0]),
+                    2 => new Reports(DBSets).GetDistricts(specifications[0], specifications[1]),
+                    3 => new Reports(DBSets).GetCities(specifications[0], specifications[1], specifications[2]),
+                    4 => new Reports(DBSets).GetStreets(specifications[0], specifications[1], specifications[2], specifications[3]),
+                    _ => default,
+                },
+                "классификаторы" => new Reports(DBSets).GetClassifiers(specifications[0]),
+                _ => default,
+            };
         }
         
         [HttpPost("GetAppsByFilter")]
-        public string Get([FromBody] object fromBody)
+        public string GetAppsByFilter([FromBody] object fromBody)
         {
-            var model = new StatisticModel();
             var value = fromBody.ToString().Replace("\n", "");
-            var filter = JsonSerializer.Deserialize<FilterModel>(value);
-            var report = new Reports(DBSets).GetAppsByFilter(filter).ToList();
-            return new ModelToJson<ApplicationModel>() { Models = report }.ToString();
+            Filter = JsonSerializer.Deserialize<FilterModel>(value);
+            Applications = new Reports(DBSets).GetAppsByFilter(Filter).ToList();
+            return new ModelToJson<ApplicationModel>() { Models = Applications }.ToString();
         }
 
+        [HttpGet("GetPoints")]
+        public string GetPoints(string chart, string a1, string a2, string selection)
+        {
+            var model = new ChartModel();
+            
+            model.Option.XAxis.Categories =
+                Enumerable.Range(1, Filter.Periods.Count() - 1).Cast<string>();
+            Filter.Periods.ToList().ForEach(period => model.Series.ToList()
+                .Add(new ChartModel.Serie()
+                {
+                    Name = period.ToString()
+                }));
+            ChartModel.Serie serie;
+            PeriodModel period;
+            DateTime createdAt;
+            int indexOfDay;
+            foreach (var app in Applications)
+            {
+                if (a1 == app.Company && a2 == app.Classifier)
+                {
+                    createdAt = DateTime.Parse(app.CreatedAt);
+                    period = Filter.Periods.Where(period => period.CheckDate(createdAt)).First();
+                    serie = model.Series.Where(serie => serie.Name == period.ToString()).ToList().First();
+                    serie.Data ??= new List<int>((period.To - period.From).Days);
+                    indexOfDay = serie.Data.ToList().Count() - (period.To - createdAt).Days;
+                    serie.Data.ToList()[indexOfDay] += 1;
+                }
+            }
+            return JsonSerializer.Serialize(model);
+        }
+        [HttpGet("GetTable")]
+        public string GetTable()
+        {
+            Statistic statistic = new Statistic();
+
+
+            return new ModelToJson<ApplicationModel>() { Models = Applications }.ToString();
+        }
         // POST: api/EDSChart
         //получаем из фрона JSON с конфигурации отчета (тип, категория, фильтры (спецификации) и дату)
         [HttpPost]
