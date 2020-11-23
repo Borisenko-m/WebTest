@@ -142,7 +142,7 @@ namespace WebTest.Controllers
         [HttpGet("GetTable")]
         public string GetTable()
         {
-            Statistic statistic = new Statistic();
+           
 
 
             return new ModelToJson<ApplicationModel>() { Models = Applications }.ToString();
