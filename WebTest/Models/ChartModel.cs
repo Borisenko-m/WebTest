@@ -8,6 +8,11 @@ namespace WebTest.Models
 {
     public class ChartModel
     {
+        public ChartModel()
+        {
+            Option = new Options();
+            Series = new List<Serie>();
+        }
         [JsonPropertyName("series")]
         public IEnumerable<Serie> Series { get; set; } = default;
 
@@ -16,16 +21,28 @@ namespace WebTest.Models
 
         public class Options
         {
+            public Options()
+            {
+                XAxis = new XAxis();
+            }
             [JsonPropertyName("xaxis")]
             public XAxis XAxis { get; set; } = default;
         }
         public class XAxis
         {
+            public XAxis()
+            {
+                Categories = new List<string>();
+            }
             [JsonPropertyName("categories")]
             public IEnumerable<string> Categories { get; set; } = default;
         }
         public class Serie
         {
+            public Serie()
+            {
+                Name = "";
+            }
             [JsonPropertyName("name")]
             public string Name { get; set; }
             [JsonPropertyName("data")]

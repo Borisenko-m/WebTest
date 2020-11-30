@@ -66,7 +66,6 @@ namespace WebTest.Controllers
                 default:
                     break;
             }
-
         }
 
         //                      апишка для поиска по разным фильтрам
@@ -109,32 +108,38 @@ namespace WebTest.Controllers
             return new ModelToJson<ApplicationModel>() { Models = Applications }.ToString();
         }
 
-        [HttpGet("GetPoints")]
-        public string GetPoints(string chart, string a1, string a2, string selection)
+        [HttpPost("GetPoints")]
+        public string GetPoints([FromBody] object fromBody, string chart, string a1, string a2, string selection)
         {
+            var value = fromBody.ToString().Replace("\n", "");
+            Filter = JsonSerializer.Deserialize<FilterModel>(value);
+            Applications = new Reports(DBSets).GetAppsByFilter(Filter).ToList();
             var model = new ChartModel();
-            
-            model.Option.XAxis.Categories =
-                Enumerable.Range(1, Filter.Periods.Count() - 1).Cast<string>();
-            Filter.Periods.ToList().ForEach(period => model.Series.ToList()
-                .Add(new ChartModel.Serie()
-                {
-                    Name = period.ToString()
-                }));
             ChartModel.Serie serie;
             PeriodModel period;
             DateTime createdAt;
             int indexOfDay;
+            int capacity;
+            var list = new List<int>();
+
+            model.Option.XAxis.Categories =
+                Enumerable.Range(1, Filter.Periods.First().Days).Select(l => l.ToString());
+            foreach (var item in Filter.Periods)
+            {
+                (model.Series as List<ChartModel.Serie>).Add(new ChartModel.Serie() { Name = item.ToString() });
+            }
+
             foreach (var app in Applications)
             {
-                if (a1 == app.Company && a2 == app.Classifier)
+                if (app.Company.Contains(a1))
                 {
                     createdAt = DateTime.Parse(app.CreatedAt);
                     period = Filter.Periods.Where(period => period.CheckDate(createdAt)).First();
                     serie = model.Series.Where(serie => serie.Name == period.ToString()).ToList().First();
-                    serie.Data ??= new List<int>((period.To - period.From).Days);
-                    indexOfDay = serie.Data.ToList().Count() - (period.To - createdAt).Days;
-                    serie.Data.ToList()[indexOfDay] += 1;
+                    capacity = (period.To - period.From).Days;
+                    serie.Data ??= Enumerable.Range(0, capacity).ToList().Select(l => 0).ToList();
+                    indexOfDay = capacity - (period.To - createdAt).Days - 1;
+                    (serie.Data as List<int>)[indexOfDay] += 1;
                 }
             }
             return JsonSerializer.Serialize(model);
@@ -142,9 +147,6 @@ namespace WebTest.Controllers
         [HttpGet("GetTable")]
         public string GetTable()
         {
-           
-
-
             return new ModelToJson<ApplicationModel>() { Models = Applications }.ToString();
         }
         // POST: api/EDSChart
@@ -164,19 +166,18 @@ namespace WebTest.Controllers
             }.ToString();
         }
 
-        // POST: api/EDSChart/download/?
-        [HttpPost("{name}.xlsx")]
+        // POST: api/eds/download/?
+        [HttpPost("download/{name}.xlsx")]
         public FileResult PostDownload([FromBody] object fromBody)
         {
-            
             var value = fromBody.ToString().Replace("\n", "");
             var reportModel =
                 (value is null || value == "") ?
-                new ReportConfiguration() :
-                JsonSerializer.Deserialize<ReportConfiguration>(value);
+                new FilterModel() :
+                JsonSerializer.Deserialize<FilterModel>(value);
 
             var exIO = new ExcelIO<ApplicationModel>("file", value);  
-            exIO.Execute(new Reports(DBSets).GetReport(reportModel));
+            exIO.Execute(new Reports(DBSets).GetAppsByFilter(reportModel));
 
             return new PhysicalFileResult(exIO.Path, "application/xlsx");
         }

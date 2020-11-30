@@ -17,9 +17,11 @@ namespace WebTest.Models
         [JsonPropertyName("To")]
         public DateTime To { get; set; }
 
+        public int Days => (To - From).Days;
+
         public override string ToString()
         {
-            return $"{From.ToString("yyyy'-'MM'-'dd'")} {To.ToString("yyyy'-'MM'-'dd'")}";
+            return $"{From.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss")} {To.ToString("yyyy'-'MM'-'dd' 'HH':'mm':'ss")}";
         }
     }
 }
