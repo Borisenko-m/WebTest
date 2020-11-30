@@ -18,8 +18,9 @@ namespace WebTest.Classes.ExcelIO
         {
             Xls = new XlsFile(1, TExcelFileFormat.v2010, true);
 
+            //for linux
+            //var path = @$"../share/{name}.xlsx";
             var path = @$"..\{name}.xlsx";
-
 
             FileStream = File.Exists(path) ?
                 new FileStream(path, FileMode.Truncate, FileAccess.ReadWrite) :
